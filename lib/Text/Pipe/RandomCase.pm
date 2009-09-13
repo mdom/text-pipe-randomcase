@@ -32,12 +32,18 @@ Text::Pipe::RandomCase - Text::Pipe filter to randomize character case
 =head1 DESCRIPTION
 
 This module provides a pipe segment for L<Text::Pipe> to randomly
-uppercase the characters of a string. It takes one optional argument
-named I<probatility>, which determines the frequency of upper case
-characters. Any 1/N'th character will be uppercased on average.
+uppercase the characters of a string. All of the described methods
+can also be used as paramters to its constructor.
 
-If you do not pass any arguments, I<filter()> will return strings
-with a probability of 1/4 for any character to be uppercased.
+=head1 METHODS
+
+=head2 probability($arg)
+
+Determines the frequency of upper case characters. Any 1/$arg'th
+character will be uppercased on average. Defaults to undef, in which
+case this module will return strings with a probability of 1/4 for
+any character to be uppercased.
+
 
 =head1 DEPENDENCIES
 
