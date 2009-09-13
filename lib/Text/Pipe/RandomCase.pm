@@ -7,11 +7,16 @@ use parent 'Text::Pipe::Base';
 our $VERSION = '0.01';
 
 __PACKAGE__->mk_scalar_accessors(qw(probability));
+__PACKAGE__->mk_boolean_accessors(qw(force_one));
 
 sub filter_single {
     my ( $self, $input ) = @_;
     my $prob = $self->probability || 4;
     $input =~ s/(.)/int rand $prob ? $1 : uc $1 /ge;
+    if ( $self->force_one and $input !~ /[[:upper:]]/ ) {
+        my $pos = int( rand( length -1 ) );
+        substr( $input, $pos, 1, uc( substr( $input, $pos, 1 ) ) );
+    }
     return $input;
 }
 
@@ -44,6 +49,12 @@ character will be uppercased on average. Defaults to undef, in which
 case this module will return strings with a probability of 1/4 for
 any character to be uppercased.
 
+=head2 force_one($bool)
+
+If given a true value - in the Perl sense, i.e. anything except
+undef, 0 or the empty string, any string will have at least one
+uppercased character in a random position. If no argument is given,
+it returns the slot's value. Default to false.
 
 =head1 DEPENDENCIES
 
