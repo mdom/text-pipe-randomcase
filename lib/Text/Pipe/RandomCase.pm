@@ -11,8 +11,8 @@ __PACKAGE__->mk_scalar_accessors(qw(probability));
 sub filter_single {
     my ( $self, $input ) = @_;
     my $prob = $self->probability || 4;
-    return join '', map { int rand $prob ? $_ : uc }
-      split //xms, $input;
+    $input =~ s/(.)/int rand $prob ? $1 : uc $1 /ge;
+    return $input;
 }
 
 1;
