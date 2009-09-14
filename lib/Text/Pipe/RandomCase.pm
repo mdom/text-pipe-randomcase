@@ -4,7 +4,7 @@ use strict;
 use warnings;
 use parent 'Text::Pipe::Base';
 
-our $VERSION = '0.02';
+our $VERSION = '0.03';
 
 __PACKAGE__->mk_scalar_accessors(qw(probability));
 __PACKAGE__->mk_boolean_accessors(qw(force_one));
